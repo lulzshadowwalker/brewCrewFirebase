@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1079474493111",
+    "project_id": "lulzbrewcrew",
+    "storage_bucket": "lulzbrewcrew.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079474493111:android:af567236d59a4a96f39f32",
+        "android_client_info": {
+          "package_name": "com.luwulzzz.lulz_crew_brew_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079474493111-kjoput70aa1aeurpqqduqks1ql48e84g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBum8j7pz2UeF0hnr65Oil20Pd423KMeAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079474493111-kjoput70aa1aeurpqqduqks1ql48e84g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
