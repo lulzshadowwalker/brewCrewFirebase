@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lulz_crew_brew_firebase/services/auth.dart';
@@ -30,9 +31,12 @@ class _LoginState extends State<Login> {
                     print("error logging in");
                   else
                     print("login succesful");
-                  print(result);
+                  print(result.userID);
                 },
-                child: Center(
+                child: Container(
+                    alignment: Alignment.center,
+                    height: 150,
+                    width: 300,
                     child: Text('Login', style: GoogleFonts.tajawal())))));
   }
 }
