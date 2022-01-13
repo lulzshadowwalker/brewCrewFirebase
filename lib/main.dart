@@ -19,10 +19,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // * Basically "providing" the stream to the root widget
+    // ? why doesnt this work: return StreamProvider<LulzUser?>.value(
     return StreamProvider.value(
       value: AuthService().user,
       initialData: null,
       child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Wrapper(),
       ),
     );

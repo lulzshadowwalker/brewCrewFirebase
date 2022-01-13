@@ -17,26 +17,29 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.purple.shade400,
           title: const Text('Login anonymously'),
           centerTitle: true,
         ),
-        body: Container(
-            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
-            child: ElevatedButton(
-                onPressed: () async {
-                  // * dynamic because it returns either result or null
-                  dynamic result = await _auth.signInAnon();
-                  if (result == null)
-                    print("error logging in");
-                  else
-                    print("login succesful");
-                  print(result.userID);
-                },
-                child: Container(
-                    alignment: Alignment.center,
-                    height: 150,
-                    width: 300,
-                    child: Text('Login', style: GoogleFonts.tajawal())))));
+        body: Center(
+          child: SizedBox(
+              // padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
+              height: 30,
+              width: 70,
+              child: ElevatedButton(
+                  onPressed: () async {
+                    // * dynamic because it returns either result or null
+                    dynamic result = await _auth.signInAnon();
+                    if (result == null)
+                      print("error logging in");
+                    else
+                      print("login succesful");
+                    print(result.userID);
+                  },
+                  child: Container(
+                      alignment: Alignment.center,
+                      height: 150,
+                      width: 300,
+                      child: Text('Login', style: GoogleFonts.tajawal())))),
+        ));
   }
 }

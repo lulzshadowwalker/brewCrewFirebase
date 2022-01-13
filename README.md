@@ -13,7 +13,7 @@ learning how to integrate Firebase with Flutter as a backend and perform multipl
 
 
 ## Changes to take note of for Firebase
-in `main.dart` make sure to add the `Firebase_core` dependancy and add `WidgetsFlutterBinding.ensureInitialized();`<br>`await Firebase.initializeApp();`<br>
+> in `main.dart` make sure to add the `Firebase_core` dependancy and add `WidgetsFlutterBinding.ensureInitialized();`<br>`await Firebase.initializeApp();`<br>
 `FirebaseUser` is now `User`<br>
 `FirebaseResult` is now `UserCredential`<br>
 `onAuthStateChanged` is now `authStateChanges` and you have to use () to access e.g. `map()`<br>

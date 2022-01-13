@@ -11,7 +11,7 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     // * have to do this in build because we need the context
     // * through <User> we're telling it that we're expecting a User
-    final LulzUser? user = Provider.of<LulzUser>(context);
+    final LulzUser? user = Provider.of<LulzUser?>(context);
     print('[Wrapper]: $user');
 
     // * return either Home or Auth
