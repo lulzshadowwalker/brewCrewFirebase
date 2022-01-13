@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:lulz_crew_brew_firebase/services/auth_service.dart';
-
-class Login extends StatefulWidget {
-  const Login({
+class SignUp extends StatefulWidget {
+  const SignUp({
     Key? key,
     required this.toggleView,
   }) : super(key: key);
@@ -13,12 +10,10 @@ class Login extends StatefulWidget {
   final Function toggleView;
 
   @override
-  _LoginState createState() => _LoginState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
-  final AuthService _auth = AuthService();
-
+class _SignUpState extends State<SignUp> {
   String _email = '';
   String _password = '';
 
@@ -38,7 +33,7 @@ class _LoginState extends State<Login> {
                 onPressed: () {
                   widget.toggleView();
                 },
-                icon: const Icon(Icons.person_add),
+                icon: const Icon(Icons.vpn_key_rounded),
                 label: const Text(""))
           ],
         ),
@@ -72,9 +67,9 @@ class _LoginState extends State<Login> {
                   ),
                   ElevatedButton(
                       onPressed: () async {
-                        print('[login] email: $_email pwd: $_password');
+                        print('[signup] email: $_email pwd: $_password');
                       },
-                      child: Text('Login',
+                      child: Text('Sign Up',
                           style: GoogleFonts.tajawal(color: Colors.white)),
                       style: ElevatedButton.styleFrom(primary: Colors.black))
                 ],

@@ -9,7 +9,8 @@ learning how to integrate Firebase with Flutter as a backend and perform multipl
 * the Provider package to listen to e.g. a stream and pass the values too all the widgets below in the tree.<br>
 
 * `flutter pub upgrade --major-versions` to upgrade all dependacies. 
-> read more about `flutter pub upgrade` https://dart.dev/tools/pub/cmd/pub-upgrade
+> read more about `flutter pub upgrade` https://dart.dev/tools/pub/cmd/pub-upgrade <br>
+>to access a member of a widget from the state object in a stateful widget you would use `widget.` instead of `this.` because it refers to the state object. <br>
 
 
 ## Changes to take note of for Firebase
