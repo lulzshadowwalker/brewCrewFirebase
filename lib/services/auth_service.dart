@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lulz_crew_brew_firebase/models/lulz_user.dart';
 
+// * all the auth "logic" is handeled in this class
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -26,7 +27,8 @@ class AuthService {
       return _userFromFirebaseUser(
           user); // * or simply return result.user if it's not gonna be used later
     } catch (e) {
-      print(e.toString());
+      print('[ERROR] authService::signInAnon >> ${e.toString()}');
+      return null; 
     }
   }
 
@@ -35,4 +37,12 @@ class AuthService {
   // * register with email and password
 
   // * sign out
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print('[ERROR] authService::signOut >> ${e.toString()}');
+      return null;
+    }
+  }
 }

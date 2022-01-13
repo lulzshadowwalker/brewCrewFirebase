@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lulz_crew_brew_firebase/screens/home/home.dart';
 import 'package:lulz_crew_brew_firebase/screens/wrapper.dart';
-import 'package:lulz_crew_brew_firebase/services/auth.dart';
+import 'package:lulz_crew_brew_firebase/services/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 

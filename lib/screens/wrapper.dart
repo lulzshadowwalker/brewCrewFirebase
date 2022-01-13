@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lulz_crew_brew_firebase/models/lulz_user.dart';
-import 'package:lulz_crew_brew_firebase/screens/auth/auth.dart';
+import 'package:lulz_crew_brew_firebase/screens/auth/auth_screen.dart';
 import 'package:lulz_crew_brew_firebase/screens/home/home.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +14,7 @@ class Wrapper extends StatelessWidget {
     final LulzUser? user = Provider.of<LulzUser?>(context);
     print('[Wrapper]: $user');
 
-    // * return either Home or Auth
-    return const Auth();
+    // * return either Home or Auth depending on the auth status
+    return user == null ? const AuthScreen() : Home();
   }
 }
