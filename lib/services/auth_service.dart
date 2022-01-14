@@ -28,13 +28,25 @@ class AuthService {
           user); // * or simply return result.user if it's not gonna be used later
     } catch (e) {
       print('[ERROR] authService::signInAnon >> ${e.toString()}');
-      return null; 
+      return null;
     }
   }
 
   // * sign in with email and password
 
   // * register with email and password
+  Future registerWithEmailAndPassword(
+      {required String email, required String password}) async {
+    try {
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+
+      return _userFromFirebaseUser(result.user);
+    } catch (e) {
+      print('[ERROR] registerEmailPwd: ${e.toString()}');
+      return null;
+    }
+  }
 
   // * sign out
   Future signOut() async {

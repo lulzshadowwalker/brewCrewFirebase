@@ -9,8 +9,9 @@ learning how to integrate Firebase with Flutter as a backend and perform multipl
 * the Provider package to listen to e.g. a stream and pass the values too all the widgets below in the tree.<br>
 
 * `flutter pub upgrade --major-versions` to upgrade all dependacies. 
-> read more about `flutter pub upgrade` https://dart.dev/tools/pub/cmd/pub-upgrade <br>
->to access a member of a widget from the state object in a stateful widget you would use `widget.` instead of `this.` because it refers to the state object. <br>
+> read more about `flutter pub upgrade` https://dart.dev/tools/pub/cmd/pub-upgrade <br><br>
+>to access a member of a widget from the state object in a stateful widget you would use `widget.` instead of `this.` because it refers to the state object. <br><br>
+>a form `key` is used to keep track of the state of the form and help us validate by using  `key.currentState.validate()` and validation is done through checking the `validators` you set on the form text fields and if all of them return null then the input is valid according to your rules and if any of them returns a string then it is invalid. <br><br> 
 
 
 ## Changes to take note of for Firebase
