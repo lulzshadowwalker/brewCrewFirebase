@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lulz_crew_brew_firebase/services/auth_service.dart';
+import 'package:lulz_crew_brew_firebase/shared/constants.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({
@@ -28,36 +29,25 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('login anon', style: GoogleFonts.tajawal()),
+          title: Text('Sign up', style: GoogleFonts.tajawal()),
           centerTitle: true,
           backgroundColor: Colors.black,
-          actions: <Widget>[
-            ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.transparent,
-                    elevation:
-                        0.0), // * elevation set to 0.0 because if we change the color to other than black in the future
-                onPressed: () {
-                  widget.toggleView();
-                },
-                icon: const Icon(Icons.vpn_key_rounded),
-                label: const Text(""))
-          ],
         ),
         body: Container(
-            padding:
+            margin:
                 const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
             child: Form(
               key: _formKey,
               child: Column(
                 children: <Widget>[
+                  const SizedBox(
+                    height: 150,
+                  ),
                   TextFormField(
                     validator: (value) =>
                         value!.isEmpty ? 'Enter an email' : null,
-                    decoration: InputDecoration(
-                        hintText: "Email",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50))),
+                    decoration:
+                        lulzInputDecoration.copyWith(hintText: "E-mail"),
                     onChanged: (value) {
                       setState(() => _email = value);
                     },
@@ -67,10 +57,8 @@ class _SignUpState extends State<SignUp> {
                     validator: (value) => value!.length < 6
                         ? 'Password must be 6+ characters'
                         : null,
-                    decoration: InputDecoration(
-                        hintText: "Password",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50))),
+                    decoration:
+                        lulzInputDecoration.copyWith(hintText: "Password"),
                     obscureText: true,
                     onChanged: (value) {
                       setState(() => _password = value);
@@ -96,10 +84,37 @@ class _SignUpState extends State<SignUp> {
                       child: Text('Sign Up',
                           style: GoogleFonts.tajawal(color: Colors.white)),
                       style: ElevatedButton.styleFrom(primary: Colors.black)),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   Text(
                     _error,
                     style: GoogleFonts.tajawal(color: Colors.red),
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 30.0),
+                      alignment: Alignment.bottomRight,
+                      child: FloatingActionButton.extended(
+                        onPressed: () {
+                          widget.toggleView();
+                        },
+                        label: Row(
+                          children: <Widget>[
+                            Text(
+                              'Sign in ?',
+                              style: GoogleFonts.tajawal(),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            const Icon(Icons.person_add)
+                          ],
+                        ),
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
+                        splashColor: Colors.blue,
+                      ),
+                    ),
                   )
                 ],
               ),

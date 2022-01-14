@@ -12,23 +12,25 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-      title: Text("MANDEM",
-          style: GoogleFonts.tajawal(fontWeight: FontWeight.w700)),
-      centerTitle: true,
-      backgroundColor: Colors.black,
-      elevation: 8,
-      actions: <Widget>[
-        ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-                primary: Colors.transparent,
-                elevation:
-                    0.0), // * elevation set to 0.0 because if we change the color to other than black in the future
+          title: Text("MANDEM",
+              style: GoogleFonts.tajawal(fontWeight: FontWeight.w700)),
+          centerTitle: true,
+          backgroundColor: Colors.black,
+          elevation: 8,
+        ),
+        body: Container(
+          padding: const EdgeInsets.symmetric(vertical: 35.0, horizontal: 20),
+          alignment: Alignment.bottomRight,
+          child: FloatingActionButton(
             onPressed: () async {
               await _auth.signOut();
             },
-            icon: const Icon(Icons.exit_to_app),
-            label: const Text(""))
-      ],
-    ));
+            backgroundColor: Colors.black,
+            foregroundColor: Colors.white,
+            hoverColor: Colors.yellow.shade700,
+            child: const Icon(Icons.exit_to_app),
+            splashColor: Colors.red,
+          ),
+        ));
   }
 }
