@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lulz_crew_brew_firebase/models/lulz_user.dart';
+import 'package:lulz_crew_brew_firebase/services/database_firestore.dart';
 
 // * all the auth "logic" is handeled in this class
 class AuthService {
@@ -26,6 +27,7 @@ class AuthService {
       User? user = result.user;
       return _userFromFirebaseUser(
           user); // * or simply return result.user if it's not gonna be used later
+      // ** nm we do need it later, at least in the sign in with email and pwd
     } catch (e) {
       print('[ERROR] authService::signInAnon >> ${e.toString()}');
       return null;
@@ -38,8 +40,9 @@ class AuthService {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
+      User? user = result.user;
 
-      return _userFromFirebaseUser(result.user);
+      return _userFromFirebaseUser(user);
     } catch (e) {
       print('[ERROR] signInEmailPwd: ${e.toString()}');
       return null;
@@ -53,7 +56,12 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      return _userFromFirebaseUser(result.user);
+      User? user = result.user;
+
+      DatabaseService(userId: user!.uid)
+          .updateUserData(sugars: '0', name: 'new user', strength: 100);
+
+      return _userFromFirebaseUser(user);
     } catch (e) {
       print('[ERROR] registerEmailPwd: ${e.toString()}');
       return null;

@@ -13,6 +13,9 @@ learning how to integrate Firebase with Flutter as a backend and perform multipl
 * to access a member of a widget from the state object in a stateful widget you would use `widget.` instead of `this.` because it refers to the state object. <br>
 * a form `key` is used to keep track of the state of the form and help us validate by using  `key.currentState.validate()` and validation is done through checking the `validators` you set on the form text fields and if all of them return null then the input is valid according to your rules and if any of them returns a string then it is invalid. <br>
 * Using const values as a form of refactoring insteade of classes might be more efficient/professional and you can get around the problem of the non-constant parameters by using `.copyWith()` method<br>
+* in Firestore databases, you don't "have" to create the collection before-hand if it doesn't 
+ exist it'll be created automatically<br>
+* creating a dictionary of key:value<br>
 
 ### notable packages
 * firebase_auth

@@ -50,7 +50,7 @@ class _LoginState extends State<Login> {
                   child: Column(
                     children: <Widget>[
                       const SizedBox(
-                        height: 150,
+                        height: 100,
                       ),
                       TextFormField(
                         validator: (value) =>

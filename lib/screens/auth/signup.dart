@@ -41,7 +41,7 @@ class _SignUpState extends State<SignUp> {
               child: Column(
                 children: <Widget>[
                   const SizedBox(
-                    height: 150,
+                    height: 100,
                   ),
                   TextFormField(
                     validator: (value) =>
@@ -107,7 +107,7 @@ class _SignUpState extends State<SignUp> {
                             const SizedBox(
                               width: 10,
                             ),
-                            const Icon(Icons.person_add)
+                            const Icon(Icons.person_sharp)
                           ],
                         ),
                         backgroundColor: Colors.black,
