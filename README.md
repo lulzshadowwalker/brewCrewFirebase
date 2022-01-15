@@ -16,6 +16,11 @@ learning how to integrate Firebase with Flutter as a backend and perform multipl
 * in Firestore databases, you don't "have" to create the collection before-hand if it doesn't 
  exist it'll be created automatically<br>
 * creating a dictionary of key:value<br>
+* `List` class is a child of `Iterable` and in e.g. `List<Brew> _brewList(QuerySnapshot snapshot)` the method `map()` returns an `Iterable<Brew>` and to convert it to `List<Brew>` use the `.toList()` method<br>
+* putting a `ListView` (which is a scrollable so it doesn't have a height) inside e.g. a `Column` (not scrollable) would cause an error but the best work around is to set the value of `shrinkWrap` to `true` inside of the `ListView`<br>
+> for more info about `shrinkWrap`: https://stackoverflow.com/questions/54007073/what-does-the-shrinkwrap-property-do-in-flutter <br>
+* to set the color of an `ElevatedButton` from the `style` field add `ElevatedButton.styleFrom(primary: some-color)`<br>
+> better styling for elevated button: https://stackoverflow.com/questions/49991444/create-a-rounded-button-button-with-border-radius-in-flutter<br>
 
 ### notable packages
 * firebase_auth
@@ -27,4 +32,4 @@ learning how to integrate Firebase with Flutter as a backend and perform multipl
 > in `main.dart` make sure to add the `Firebase_core` dependancy and add `WidgetsFlutterBinding.ensureInitialized();`<br>`await Firebase.initializeApp();`<br>
 `FirebaseUser` is now `User`<br>
 `FirebaseResult` is now `UserCredential`<br>
-`onAuthStateChanged` is now `authStateChanges` and you have to use () to access e.g. `map()`<br>
+`onAuthStateChanged` is now `authStateChanges` and now you have to use () to access e.g. `map()`<br>

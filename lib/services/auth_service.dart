@@ -56,7 +56,7 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      User? user = result.user;
+      User?  user = result.user;
 
       DatabaseService(userId: user!.uid)
           .updateUserData(sugars: '0', name: 'new user', strength: 100);
