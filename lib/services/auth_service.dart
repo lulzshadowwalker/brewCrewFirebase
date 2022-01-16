@@ -11,7 +11,7 @@ class AuthService {
   // ignore: unused_element
   LulzUser? _userFromFirebaseUser(User? user) {
     // ignore: unnecessary_null_comparison
-    return user != null ? LulzUser(userID: user.uid) : null;
+    return user != null ? LulzUser(userId: user.uid) : null;
   }
 
   // * a stream to listen to auth status of user

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lulz_crew_brew_firebase/models/brew.dart';
+import 'package:lulz_crew_brew_firebase/models/lulz_user.dart';
 
 class DatabaseService {
   final String? userId;
@@ -43,9 +44,26 @@ class DatabaseService {
         .toList();
   }
 
+  // LulzUserData from a snapshot
+  LulzUserData lulzUserDataFromSnapshot(DocumentSnapshot doc) {
+    return LulzUserData(
+        userId: userId,
+        sugars: doc['sugars'],
+        name: doc['name'],
+        strength: doc['stregth']);
+  }
+
+  // get LulzUserDocument document stream
+  Stream<LulzUserData> get userData {
+    return _brewCollection
+        .doc(userId)
+        .snapshots()
+        .map((lulzUserDataFromSnapshot));
+  }
+
   // get brew stream
   Stream<List<Brew>> get coffee {
     return _brewCollection.snapshots().map(_brewListFromSnapshot);
-    // * .map((snapshot) => _brewListFromSnapshot(snapshot)); = .map(_brewListFromSnapshot); I love dart 🤤 
+    // * .map((snapshot) => _brewListFromSnapshot(snapshot)); = .map(_brewListFromSnapshot); I love dart 🤤
   }
 }

@@ -17,7 +17,6 @@ class BrewList extends StatelessWidget {
     brews.forEach((brew) {
       brew.printBrewDetails();
     });
-
     return Container(
         alignment: Alignment.topLeft,
         // margin: const EdgeInsets.symmetric(vertical: 35, horizontal: 40),
