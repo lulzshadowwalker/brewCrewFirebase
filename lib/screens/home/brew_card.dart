@@ -19,11 +19,13 @@ class BrewCard extends StatelessWidget {
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: ListTile(
             title: Text(brew.name,
-                style: GoogleFonts.tajawal(fontWeight: FontWeight.w500  )),
+                style: GoogleFonts.tajawal(fontWeight: FontWeight.w500)),
             subtitle: Text('takes ${brew.sugars} sugar(s)',
                 style: GoogleFonts.tajawal()),
             leading: CircleAvatar(
               backgroundColor: Colors.brown[brew.strength],
+              backgroundImage: const AssetImage(
+                  'assets/images/coffee_icon_transparent_middle.png'), // * coffee mug with transparent middle
             ),
             dense: false,
           )),
