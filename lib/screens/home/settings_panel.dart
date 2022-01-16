@@ -14,7 +14,7 @@ class SettingsPanel extends StatefulWidget {
 }
 
 class _SettingsPanelState extends State<SettingsPanel> {
-  final GlobalKey _formKey = GlobalKey();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final List<String> _sugarsDropDownList = ['0', '1', '2', '3', '4'];
 
   String? _name;
@@ -24,91 +24,111 @@ class _SettingsPanelState extends State<SettingsPanel> {
   @override
   Widget build(BuildContext context) {
     LulzUser user = Provider.of<LulzUser>(context);
+
+    bool isLoading = false;
+
     return StreamBuilder<LulzUserData>(
         stream: DatabaseService(userId: user.userId).userData,
-        // this snapshot is just flutter's implemntation of the stream it's
-        // obviously unrelated to the document snapshot
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            LulzUserData? lulzUserData = snapshot.data;
-
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(25, 45, 25, 8),
-              child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          'Update your settings',
-                          textAlign: TextAlign.start,
-                          style: GoogleFonts.tajawal(
-                              fontSize: 26, fontWeight: FontWeight.normal),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        decoration: lulzInputDecoration.copyWith(
-                            hintText: _name ?? lulzUserData?.name),
-                        validator: (value) =>
-                            value!.isEmpty ? 'Enter a value!' : null,
-                        onChanged: (value) => setState(() => _name = value),
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      DropdownButtonFormField(
-                        decoration: lulzInputDecoration.copyWith(
-                            hintText:
-                                'Number of sugars'), // * i think this is unnecessary here but if i need it's there
-                        value: _sugars ?? lulzUserData?.sugars,
-                        items: _sugarsDropDownList
-                            .map((e) => DropdownMenuItem(
-                                  value: e,
-                                  child: Text('$e sugars'),
-                                ))
-                            .toList(),
-                        onChanged: (value) =>
-                            setState(() => _sugars = value.toString()),
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      Slider(
-                          label: 'Coffee strength',
-                          activeColor:
-                              Colors.brown[_strength ?? lulzUserData!.strength],
-                          thumbColor:
-                              Colors.brown[_strength ?? lulzUserData!.strength],
-                          inactiveColor: Colors.brown.shade200,
-                          value: (_strength ?? 100).toDouble(),
-                          min: 100,
-                          max: 900,
-                          divisions: 8,
-                          onChanged: (val) => setState(
-                                () => _strength = val.toInt(),
-                              )),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      ElevatedButton(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        onPressed: () {},
-                        child: Text('save',
-                            style: GoogleFonts.tajawal(color: Colors.white)),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
-                        ),
-                      )
-                    ],
-                  )),
-            );
+            print('StreamBuilder: all good holy shit');
+            LulzUserData? userData = snapshot.data;
+            return isLoading
+                ? const LoadingScreen()
+                : Padding(
+                    padding: const EdgeInsets.fromLTRB(25, 45, 25, 8),
+                    child: Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Text(
+                                'Update your settings',
+                                textAlign: TextAlign.start,
+                                style: GoogleFonts.tajawal(
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            TextFormField(
+                              decoration: lulzInputDecoration.copyWith(
+                                  hintText: _name ?? userData?.name),
+                              // validator: (value) =>
+                              //     value!.isEmpty ? 'Enter a value!' : null,
+                              onChanged: (value) =>
+                                  setState(() => _name = value),
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            DropdownButtonFormField(
+                              decoration: lulzInputDecoration.copyWith(
+                                  hintText: _sugars == null
+                                      ? 'c sugars'
+                                      : '$_sugars sugars'),
+                              value: _sugars ?? '${userData?.sugars}',
+                              items: _sugarsDropDownList
+                                  .map((e) => DropdownMenuItem(
+                                        value: e,
+                                        child: Text('$e sugars'),
+                                      ))
+                                  .toList(),
+                              onChanged: (value) =>
+                                  setState(() => _sugars = value.toString()),
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            Slider(
+                                label: 'Coffee strength',
+                                activeColor: Colors
+                                    .brown[_strength ?? userData!.strength],
+                                thumbColor: Colors
+                                    .brown[_strength ?? userData!.strength],
+                                inactiveColor: Colors.brown.shade200,
+                                value: (_strength ?? userData!.strength)
+                                    .toDouble(),
+                                min: 100,
+                                max: 900,
+                                divisions: 8,
+                                onChanged: (val) => setState(
+                                      () => _strength = val.toInt(),
+                                    )),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            ElevatedButton(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              onPressed: () async {
+                                // I dont really check for anything for validation so it's always valid
+                                // but in-case i want to in the future, it's there
+                                if (_formKey.currentState!.validate()) {
+                                  setState(() => isLoading = true);
+                                  await DatabaseService(userId: user.userId)
+                                      .updateUserData(
+                                    name: _name ?? userData?.name,
+                                    sugars: _sugars ?? userData?.sugars,
+                                    strength: _strength ?? userData?.strength,
+                                  );
+                                  Navigator.pop(context);
+                                }
+                              },
+                              child: Text('save',
+                                  style:
+                                      GoogleFonts.tajawal(color: Colors.white)),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.black,
+                              ),
+                            )
+                          ],
+                        )),
+                  );
           } else {
-            print('[ERROR] SettingsPanel::StreamBuilder ${snapshot.error}');
-            return const SizedBox(height: 450, child: LoadingScreen());
+            return LoadingScreen();
           }
         });
   }

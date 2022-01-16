@@ -34,6 +34,20 @@ class DatabaseService {
         .set({'sugars': sugars, 'name': name, 'strength': strength});
   }
 
+// user data from snapshots
+  LulzUserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return LulzUserData(
+        userId: userId,
+        name: snapshot['name'],
+        sugars: snapshot['sugars'],
+        strength: snapshot['strength']);
+  }
+
+// get user doc stream
+  Stream<LulzUserData> get userData {
+    return _brewCollection.doc(userId).snapshots().map(_userDataFromSnapshot);
+  }
+
   // Brew list from a snapshot
   List<Brew> _brewListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs
@@ -53,13 +67,6 @@ class DatabaseService {
         strength: doc['stregth']);
   }
 
-  // get LulzUserDocument document stream
-  Stream<LulzUserData> get userData {
-    return _brewCollection
-        .doc(userId)
-        .snapshots()
-        .map((lulzUserDataFromSnapshot));
-  }
 
   // get brew stream
   Stream<List<Brew>> get coffee {

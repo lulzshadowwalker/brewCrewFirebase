@@ -33,6 +33,7 @@ learning how to integrate Firebase with Flutter as a backend and perform multipl
 > better styling for elevated button: https://stackoverflow.com/questions/49991444/create-a-rounded-button-button-with-border-radius-in-flutter<br>
 
 
+* you can close the bottom sheet programatically simply by using `Navigator.pop(context)`<br>
 ### notable packages
 * firebase_auth
 * cloud_firestore
