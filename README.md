@@ -45,3 +45,5 @@ learning how to integrate Firebase with Flutter as a backend and perform multipl
 `FirebaseUser` is now `User`<br>
 `FirebaseResult` is now `UserCredential`<br>
 `onAuthStateChanged` is now `authStateChanges` and now you have to use () to access e.g. `map()`<br>
+
+
