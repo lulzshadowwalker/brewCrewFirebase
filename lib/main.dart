@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // * Basically "providing" the stream to the root widget
     // ? why doesnt this work: return StreamProvider<LulzUser?>.value(
+    // ? BECAUSE IT WASN'T IMPORTED IDIOT
     return StreamProvider.value(
       value: AuthService().user,
       initialData: null,

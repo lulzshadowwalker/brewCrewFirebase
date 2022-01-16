@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lulz_crew_brew_firebase/models/lulz_user.dart';
 import 'package:lulz_crew_brew_firebase/screens/auth/auth_screen.dart';
 import 'package:lulz_crew_brew_firebase/screens/home/home.dart';
+import 'package:lulz_crew_brew_firebase/services/database_firestore.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
@@ -15,6 +16,10 @@ class Wrapper extends StatelessWidget {
     print('[Wrapper]: $user');
 
     // * return either Home or Auth depending on the auth status
-    return user == null ? const AuthScreen() : Home();
+    return StreamProvider<LulzUserData>.value(
+        value: DatabaseService(userId: user?.userId).userData,
+        initialData:
+            LulzUserData(userId: null, name: '', sugars: '', strength: 0),
+        child: user == null ? const AuthScreen() : Home());
   }
 }

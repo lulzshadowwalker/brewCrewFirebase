@@ -1,5 +1,3 @@
-
-
 class LulzUser {
   final String userId;
 

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lulz_crew_brew_firebase/models/brew.dart';
+import 'package:lulz_crew_brew_firebase/models/lulz_user.dart';
 import 'package:lulz_crew_brew_firebase/screens/home/brew_list.dart';
 import 'package:lulz_crew_brew_firebase/screens/home/settings_panel.dart';
 import 'package:lulz_crew_brew_firebase/services/auth_service.dart';
@@ -26,6 +27,9 @@ class Home extends StatelessWidget {
           context: context,
           builder: (context) => const SettingsPanel());
     }
+
+    // used for the 'welcome back' header
+    final LulzUserData user = Provider.of<LulzUserData>(context);
 
     return StreamProvider<List<Brew>>.value(
       value: DatabaseService(userId: null).coffee,
@@ -59,8 +63,7 @@ class Home extends StatelessWidget {
                                   color: Colors.black),
                             ),
                             Text(
-                              'lulz!',
-                              // todo make the name dynamicp
+                              user.name,
                               style: GoogleFonts.tajawal(
                                   fontSize: 36,
                                   fontWeight: FontWeight.w700,
