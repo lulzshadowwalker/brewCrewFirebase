@@ -7,6 +7,7 @@ final lulzInputDecoration = InputDecoration(
       borderRadius: BorderRadius.circular(50),
       borderSide: const BorderSide(
         color: Colors.transparent,
+        // ik :D
         width: 2,
       )),
   focusedBorder: OutlineInputBorder(
