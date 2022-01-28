@@ -17,7 +17,7 @@ learning how to integrate Firebase with Flutter as a backend and perform multipl
 
 * A form `key` is used to keep track of the state of the form and help us validate by using  `key.currentState.validate()` and validation is done through checking the `validators` you set on the form text fields and if all of them return null then the input is valid according to your rules and if any of them returns a string then it is invalid. <br>
 
-* Using const values as a form of refactoring insteade of classes might be more efficient/professional and you can get around the problem of the non-constant parameters by using `.copyWith()` method<br>
+* Using const values as a form of refactoring insteade of classes might be more efficient/professional and you can get around the problem of the non-constant parameters by using `.copyWith()` method. ( thinking about it, it depends whether you wanna give full controll to edit the value or not, with a class implementation, you can kind of limit the customizablity while with const values you can pmuch modify whatever with e.g. `copyWith()` )<br>
 
 * In Firestore databases, you don't "have" to create the collection before-hand if it doesn't 
  exist it'll be created automatically<br>
